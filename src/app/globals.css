@@ -1,0 +1,475 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Nepal Festival Atlas — design tokens
+   Palette drawn from natural paper, sindur, saffron, antique gold,
+   forest, indigo and stone. Festival pages override the --f-* tokens.
+   ------------------------------------------------------------------ */
+
+:root {
+  --paper: #f4eee2;
+  --paper-deep: #eae0cc;
+  --paper-raised: #fbf8f1;
+  --ink: #1d1a16;
+  --ink-2: #4a433a;
+  --ink-3: #6b6152;
+  --rule: #d6cab3;
+  --rule-strong: #b9aa8e;
+  --vermilion: #a92f1c;
+  --sindur: #c0391f;
+  --burgundy: #6b1f2a;
+  --saffron: #d4881e;
+  --saffron-text: #8e5209;
+  --gold: #b08d47;
+  --gold-text: #7a5c22;
+  --forest: #2e4a3b;
+  --indigo: #263a5c;
+  --stone: #8b8172;
+  --focus: #1f5fbf;
+
+  /* festival theme defaults (overridden per article) */
+  --f-bg: #1d1a16;
+  --f-ink: #f4eee2;
+  --f-accent: #c0391f;
+  --f-accent-2: #d4881e;
+  --f-deep: #6b1f2a;
+  --f-soft: #eae0cc;
+  --f-text-accent: #a92f1c;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #15120f;
+    --paper-deep: #1e1a15;
+    --paper-raised: #221d17;
+    --ink: #efe7d8;
+    --ink-2: #c9beab;
+    --ink-3: #a39884;
+    --rule: #3a332a;
+    --rule-strong: #5a4f40;
+    --vermilion: #ee7a5f;
+    --sindur: #e8664a;
+    --burgundy: #d68c96;
+    --saffron: #e9a24a;
+    --saffron-text: #e9a24a;
+    --gold: #d2ae68;
+    --gold-text: #d2ae68;
+    --forest: #8db59c;
+    --indigo: #9db2d8;
+    --stone: #9c917f;
+    --focus: #8ab4ff;
+    --f-soft: #221d17;
+    --f-text-accent: #ee7a5f;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #15120f;
+  --paper-deep: #1e1a15;
+  --paper-raised: #221d17;
+  --ink: #efe7d8;
+  --ink-2: #c9beab;
+  --ink-3: #a39884;
+  --rule: #3a332a;
+  --rule-strong: #5a4f40;
+  --vermilion: #ee7a5f;
+  --sindur: #e8664a;
+  --burgundy: #d68c96;
+  --saffron: #e9a24a;
+  --saffron-text: #e9a24a;
+  --gold: #d2ae68;
+  --gold-text: #d2ae68;
+  --forest: #8db59c;
+  --indigo: #9db2d8;
+  --stone: #9c917f;
+  --focus: #8ab4ff;
+  --f-soft: #221d17;
+  --f-text-accent: #ee7a5f;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-vermilion: var(--vermilion);
+  --color-sindur: var(--sindur);
+  --color-burgundy: var(--burgundy);
+  --color-saffron: var(--saffron);
+  --color-saffron-text: var(--saffron-text);
+  --color-gold: var(--gold);
+  --color-gold-text: var(--gold-text);
+  --color-forest: var(--forest);
+  --color-indigo: var(--indigo);
+  --color-stone: var(--stone);
+  --color-f-bg: var(--f-bg);
+  --color-f-ink: var(--f-ink);
+  --color-f-accent: var(--f-accent);
+  --color-f-accent-2: var(--f-accent-2);
+  --color-f-deep: var(--f-deep);
+  --color-f-soft: var(--f-soft);
+  --color-f-text-accent: var(--f-text-accent);
+
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-serif: var(--font-source-serif), var(--font-noto-deva), Georgia, serif;
+  --font-sans: var(--font-mukta), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-deva: var(--font-noto-deva), var(--font-mukta), "Noto Sans Devanagari", sans-serif;
+  --font-deva-display: var(--font-tiro-deva), var(--font-noto-deva), serif;
+
+  --text-2xs: 0.6875rem;
+  --breakpoint-xs: 30rem;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+:lang(ne) {
+  font-family: var(--font-deva);
+  line-height: 1.8;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--saffron) 45%, transparent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------------
+   Editorial typography utilities
+   ------------------------------------------------------------------ */
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 340;
+  font-size: clamp(2.9rem, 7.4vw, 7.25rem);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(2.3rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "SOFT" 30, "opsz" 120;
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  font-variation-settings: "SOFT" 20, "opsz" 72;
+}
+
+@utility display-sm {
+  font-family: var(--font-display);
+  font-weight: 450;
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-variation-settings: "SOFT" 10, "opsz" 36;
+}
+
+@utility kicker {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+@utility label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+@utility deva-display {
+  font-family: var(--font-deva-display);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+@utility measure {
+  max-width: 38rem;
+}
+
+@utility hairline {
+  border-color: var(--rule);
+}
+
+/* Long-form prose */
+.prose-atlas p {
+  margin-block: 0 1.1em;
+  hyphens: auto;
+}
+.prose-atlas p:last-child {
+  margin-bottom: 0;
+}
+.prose-atlas em {
+  font-style: italic;
+}
+.prose-atlas strong {
+  font-weight: 650;
+}
+.prose-atlas a:not(.cite-btn):not(.term-btn) {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+}
+.prose-atlas a:not(.cite-btn):not(.term-btn):hover {
+  text-decoration-color: currentColor;
+}
+
+.dropcap > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 4.4em;
+  line-height: 0.82;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--f-text-accent);
+  font-variation-settings: "SOFT" 50, "opsz" 144;
+}
+
+/* Inline glossary term + citation affordances */
+.term-btn {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-decoration-color: color-mix(in oklab, var(--f-text-accent) 70%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+}
+.term-btn:hover {
+  text-decoration-style: solid;
+}
+
+.cite-btn {
+  font-family: var(--font-sans);
+  font-size: 0.68em;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: super;
+  color: var(--f-text-accent);
+  background: none;
+  border: 0;
+  padding: 0 0.12em;
+  cursor: pointer;
+  text-decoration: none;
+}
+.cite-btn:hover {
+  text-decoration: underline;
+}
+
+/* Reading modes: "essentials" collapses long prose but keeps key points */
+[data-reading-mode="essentials"] .mode-full {
+  display: none;
+}
+[data-reading-mode="story"] .mode-essentials-only {
+  display: none;
+}
+
+/* Paper texture as a pure-CSS fallback layer */
+.paper-texture {
+  background-image: radial-gradient(color-mix(in oklab, var(--ink) 5%, transparent) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+}
+
+/* Scroll reveal: progressive enhancement only — content is visible without JS */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Ambient illustration motion */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translate(var(--dx, 6px), var(--dy, -10px)) rotate(calc(var(--r, 0deg) + 4deg));
+  }
+}
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  40% {
+    opacity: 0.82;
+    transform: scale(0.96, 1.04);
+  }
+  70% {
+    opacity: 0.95;
+    transform: scale(1.03, 0.97);
+  }
+}
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+@keyframes flutter {
+  0%,
+  100% {
+    transform: skewY(0deg) scaleY(1);
+  }
+  50% {
+    transform: skewY(4deg) scaleY(0.97);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+.anim-drift {
+  animation: drift var(--dur, 9s) ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-flicker {
+  animation: flicker var(--dur, 2.4s) ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.anim-glow {
+  animation: glow var(--dur, 3.2s) ease-in-out infinite;
+}
+.anim-flutter {
+  animation: flutter var(--dur, 3s) ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 0 0;
+}
+.anim-sway {
+  animation: sway var(--dur, 6s) ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation: none !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Horizontal scrollers */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+.scroll-snap-x > * {
+  scroll-snap-align: start;
+}
+
+/* Print: clean article output */
+@media print {
+  header[role="banner"],
+  footer[role="contentinfo"],
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
