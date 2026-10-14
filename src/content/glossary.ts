@@ -108,5 +108,16 @@ const list: GlossaryTerm[] = [
   { id: "mithila", term: "Mithila", ne: "मिथिला", romanized: "mithilā", definition: "The Maithili-speaking cultural region spanning south-eastern Nepal and northern Bihar, centred historically on Janakpur." },
 ];
 
+/** Common nouns appear in lower case when used mid-sentence. */
+const COMMON = new Set([
+  "tithi", "purnima", "sankranti", "panchanga", "saait", "lho", "jamara", "tika", "kalash", "navapatrika", "khadga", "linge-ping", "rote-ping",
+  "changa", "dakshina", "kubhindo", "diyo", "sayapatri", "makhamali", "saptarangi-tika", "arghya", "vratti", "thekua", "soop", "ghat", "chir", "abir",
+  "kora", "stupa", "dar", "pote", "khada", "lungta", "damphu", "chaku", "tarul", "badghar", "sili", "jatra", "puja", "prasad", "yosin", "shukla-paksha", "krishna-paksha",
+]);
+
+export function inlineLabel(t: GlossaryTerm) {
+  return COMMON.has(t.id) ? t.term.toLowerCase() : t.term;
+}
+
 export const glossary: Record<string, GlossaryTerm> = Object.fromEntries(list.map((t) => [t.id, t]));
 export const glossaryList = list;

@@ -806,7 +806,7 @@ export const dashain: Festival = {
       title: "Did you know?",
       tone: "accent",
       facts: [
-        { id: "kojagrat", title: "The last day is a question", body: "Kojagrat comes from *ko jāgarti?* — \"who is awake?\" — Lakshmi's question to those who keep the full-moon vigil.", kind: "community", sources: ["okh-kojagrat"], treatment: "word", figure: "को जाग्रति?" },
+        { id: "kojagrat", title: "The last day is a question", body: "Kojagrat comes from *ko jāgarti?* — \"who is awake?\" — Lakshmi's question to those who keep the full-moon vigil.", kind: "community", sources: ["okh-kojagrat"], treatment: "word", figure: "को जागर्ति?" },
         { id: "taleju", title: "One day a year", body: "Taleju's temple at Hanuman Dhoka opens to the public only on Maha Navami.", kind: "contemporary", sources: ["okh-taleju-navami"], treatment: "number", figure: "1" },
         { id: "eleven", title: "Eleven heroes in one blessing", body: "The tika verse for men wishes eleven qualities — long life, prosperity, victory, splendour, swiftness, honour, generosity, strength, truthfulness, wisdom and fame — each tied to a figure of the epics.", kind: "community", sources: ["hamropatro-tika-mantra"], treatment: "number", figure: "11" },
         { id: "million", title: "A country on the move", body: "Around one million people were expected to leave the Kathmandu Valley by road for Dashain in 2026.", kind: "contemporary", sources: ["ktm-post-exodus-2026"], treatment: "number", figure: "~1M" },

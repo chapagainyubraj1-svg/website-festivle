@@ -1,31 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useStoredValue } from "@/lib/hooks";
 
 type Theme = "system" | "light" | "dark";
 
-function readTheme(): Theme {
-  try {
-    const t = localStorage.getItem("nfa-theme");
-    return t === "light" || t === "dark" ? t : "system";
-  } catch {
-    return "system";
-  }
-}
-
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("system");
-  useEffect(() => setTheme(readTheme()), []);
+  const [stored, store] = useStoredValue("nfa-theme", "system");
+  const theme: Theme = stored === "light" || stored === "dark" ? stored : "system";
 
   const cycle = () => {
     const next: Theme = theme === "system" ? "dark" : theme === "dark" ? "light" : "system";
-    setTheme(next);
-    try {
-      if (next === "system") localStorage.removeItem("nfa-theme");
-      else localStorage.setItem("nfa-theme", next);
-    } catch {
-      /* storage unavailable: preference applies to this page view only */
-    }
+    store(next === "system" ? null : next);
     if (next === "system") document.documentElement.removeAttribute("data-theme");
     else document.documentElement.setAttribute("data-theme", next);
   };
@@ -53,23 +38,11 @@ export function ThemeToggle() {
 }
 
 export function MotionToggle() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    try {
-      setReduced(localStorage.getItem("nfa-motion") === "reduced");
-    } catch {
-      /* ignore */
-    }
-  }, []);
+  const [stored, store] = useStoredValue("nfa-motion", "full");
+  const reduced = stored === "reduced";
   const toggle = () => {
     const next = !reduced;
-    setReduced(next);
-    try {
-      if (next) localStorage.setItem("nfa-motion", "reduced");
-      else localStorage.removeItem("nfa-motion");
-    } catch {
-      /* ignore */
-    }
+    store(next ? "reduced" : null);
     if (next) document.documentElement.setAttribute("data-motion", "reduced");
     else document.documentElement.removeAttribute("data-motion");
   };

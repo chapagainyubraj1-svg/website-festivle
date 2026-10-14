@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import Link from "next/link";
-import { glossary } from "@/content/glossary";
+import { glossary, inlineLabel } from "@/content/glossary";
 import { CiteRef } from "@/components/article/CiteRef";
 import { TermRef } from "@/components/article/TermRef";
 import type { Rich } from "@/content/types";
@@ -50,7 +50,7 @@ export function renderInline(text: Rich, keyBase = "i"): ReactNode[] {
       nodes.push(<em key={key}>{renderInline(g.em, key)}</em>);
     } else if (g.term) {
       const term = glossary[g.term];
-      const label = g.termLabel ?? term?.term ?? g.term;
+      const label = g.termLabel ?? (term ? inlineLabel(term) : g.term);
       nodes.push(
         term ? (
           <TermRef key={key} term={term}>
@@ -98,7 +98,7 @@ export function plain(text: Rich): string {
   return text
     .replace(/\[\^[^\]]+\]/g, "")
     .replace(/\[\[([a-z0-9-]+)\|([^\]]+)\]\]/g, "$2")
-    .replace(/\[\[([a-z0-9-]+)\]\]/g, (_, id: string) => glossary[id]?.term ?? id)
+    .replace(/\[\[([a-z0-9-]+)\]\]/g, (_, id: string) => (glossary[id] ? inlineLabel(glossary[id]) : id))
     .replace(/\[([^\]]+)\]\((\/[^)\s]*)\)/g, "$1")
     .replace(/\*\*(.+?)\*\*/g, "$1")
     .replace(/\*(.+?)\*/g, "$1")

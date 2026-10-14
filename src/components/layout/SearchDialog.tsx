@@ -1,6 +1,7 @@
 "use client";
 
 import Fuse from "fuse.js";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { fuseOptions, normalizeQuery, type SearchEntry } from "@/lib/search";
@@ -69,8 +70,6 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
     } else if (!open && d.open) d.close();
   }, [open]);
 
-  useEffect(() => setActive(0), [query]);
-
   const go = (e: SearchEntry) => {
     if (!e.href) return;
     onClose();
@@ -97,7 +96,10 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
           ref={inputRef}
           type="search"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setActive(0);
+          }}
           onKeyDown={(e) => {
             if (e.key === "ArrowDown") {
               e.preventDefault();
@@ -124,13 +126,16 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
         </button>
       </div>
       <div className="max-h-[60vh] overflow-y-auto">
-        {failed && <p className="p-4 text-ink-2">Search could not load. Browse the <a href="/festivals">encyclopedia</a> instead.</p>}
+        {failed && <p className="p-4 text-ink-2">Search could not load. Browse the <Link href="/festivals" onClick={onClose}>encyclopedia</Link> instead.</p>}
         {query.trim().length < 2 ? (
           <div className="p-5">
             <p className="kicker text-ink-3">Try</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {["दशैँ", "Dasain", "Laxmi", "Chath", "Losar", "Kumari", "jamara", "Tharu"].map((s) => (
-                <button key={s} type="button" onClick={() => setQuery(s)} className="label rounded-full border border-rule px-3 py-1 hover:border-rule-strong">
+                <button key={s} type="button" onClick={() => {
+                    setQuery(s);
+                    setActive(0);
+                  }} className="label rounded-full border border-rule px-3 py-1 hover:border-rule-strong">
                   <span lang={/[ऀ-ॿ]/.test(s) ? "ne" : undefined}>{s}</span>
                 </button>
               ))}
@@ -139,7 +144,7 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
           </div>
         ) : results.length === 0 && entries ? (
           <p className="p-5 text-ink-2">
-            Nothing found for “{query}”. The Atlas is growing — see the <a href="/research" onClick={onClose}>research roadmap</a>.
+            Nothing found for “{query}”. The Atlas is growing — see the <Link href="/research" onClick={onClose}>research roadmap</Link>.
           </p>
         ) : (
           <ul id={listId} role="listbox" aria-label="Results" className="py-2">

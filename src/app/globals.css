@@ -128,6 +128,7 @@
   --breakpoint-xs: 30rem;
 }
 
+@layer base {
 /* ------------------------------------------------------------------
    Base
    ------------------------------------------------------------------ */
@@ -173,6 +174,8 @@ a {
 img,
 svg {
   max-width: 100%;
+}
+
 }
 
 /* ------------------------------------------------------------------
@@ -246,6 +249,7 @@ svg {
   border-color: var(--rule);
 }
 
+@layer components {
 /* Long-form prose */
 .prose-atlas p {
   margin-block: 0 1.1em;
@@ -313,6 +317,8 @@ svg {
   text-decoration: underline;
 }
 
+}
+
 /* Reading modes: "essentials" collapses long prose but keeps key points */
 [data-reading-mode="essentials"] .mode-full {
   display: none;
@@ -321,6 +327,7 @@ svg {
   display: none;
 }
 
+@layer components {
 /* Paper texture as a pure-CSS fallback layer */
 .paper-texture {
   background-image: radial-gradient(color-mix(in oklab, var(--ink) 5%, transparent) 0.6px, transparent 0.6px);
@@ -338,6 +345,8 @@ svg {
 .reveal-ready [data-reveal].is-revealed {
   opacity: 1;
   transform: none;
+}
+
 }
 
 /* Ambient illustration motion */
@@ -406,6 +415,7 @@ svg {
   }
 }
 
+@layer components {
 .anim-drift {
   animation: drift var(--dur, 9s) ease-in-out infinite;
   transform-box: fill-box;
@@ -428,6 +438,8 @@ svg {
   animation: sway var(--dur, 6s) ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: 50% 0;
+}
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -472,4 +484,41 @@ svg {
     background: #fff;
     color: #000;
   }
+}
+
+/* ------------------------------------------------------------------
+   Chapter tones — re-map ink tokens so nested components keep contrast
+   ------------------------------------------------------------------ */
+@layer components {
+.tone-paper {
+  background: var(--paper);
+}
+.tone-soft {
+  background: color-mix(in oklab, var(--f-soft) 70%, var(--paper));
+}
+.tone-night,
+.tone-deep,
+.tone-accent {
+  --ink: var(--f-ink);
+  --ink-2: color-mix(in oklab, var(--f-ink) 84%, var(--f-bg));
+  --ink-3: color-mix(in oklab, var(--f-ink) 68%, var(--f-bg));
+  --rule: color-mix(in oklab, var(--f-ink) 18%, transparent);
+  --rule-strong: color-mix(in oklab, var(--f-ink) 34%, transparent);
+  --paper-raised: color-mix(in oklab, var(--f-bg) 82%, var(--f-ink));
+  --paper-deep: color-mix(in oklab, var(--f-bg) 88%, var(--f-ink));
+  --f-text-accent: var(--f-accent-2);
+  --focus: #ffd27a;
+  color: var(--ink);
+}
+.tone-night {
+  background: var(--f-bg);
+}
+.tone-deep {
+  background: var(--f-deep);
+}
+.tone-accent {
+  --f-bg: var(--f-deep);
+  background: var(--f-deep);
+  background-image: radial-gradient(120% 80% at 85% 0%, color-mix(in oklab, var(--f-accent) 55%, transparent), transparent 60%);
+}
 }
